@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Htp\Controller\AdminController;
+use App\Http\Controllers\AdminController;
 use Dflydev\DotAccessData\Data;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -18,19 +18,19 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /* -------------------------Admin Routes------------------------- */
 
-// Route::prefix('admin')->group(function () {
+Route::prefix('admin')->group(function () {
 
-//     Route::get('/login', [AdminController::class, Index])->name('login_form');
+    Route::get('/login', [AdminController::class, 'Index'])->name('login_form');
 
-//     Route::get('/login/owner', [AdminController::class, Login])->name('admin.login');
+    Route::post('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
 
-//     Route::get('/dashboard', [AdminController::class, Dashboard])->name('admin.dashboard');
-// });
+    Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name('admin.dashboard')->middleware('admin');
+});
 
 /* -------------------------End Admin Routes--------------------------- */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.category');
 });
 
 Route::get('/dashboard', function () {
